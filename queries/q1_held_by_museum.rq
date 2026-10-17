@@ -1,0 +1,10 @@
+# 질의 1 · 국립고궁박물관이 소장한 유물은? / Which artifacts does the National Palace Museum hold?
+PREFIX kdh: <http://dh.aks.ac.kr/2026/kdh/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?artifact WHERE {
+  ?a kdh:heldBy ?m .
+  ?m rdfs:label "국립고궁박물관"@ko .
+  ?a rdfs:label ?artifact .
+  FILTER(lang(?artifact)="ko")
+}

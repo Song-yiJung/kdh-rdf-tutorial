@@ -1,0 +1,11 @@
+# 질의 3 · 호작도에 이어진 것은 모두? / Everything linked to the Hojakdo motif
+PREFIX kdh: <http://dh.aks.ac.kr/2026/kdh/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?name ?relation WHERE {
+  ?m rdfs:label "호작도"@ko .
+  ?x ?p ?m .
+  ?x rdfs:label ?name .
+  ?p rdfs:label ?relation .
+  FILTER(lang(?name)="ko" && lang(?relation)="ko")
+}

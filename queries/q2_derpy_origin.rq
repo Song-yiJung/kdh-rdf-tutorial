@@ -1,0 +1,13 @@
+# 질의 2 · 더피의 원형은 어디서 보나? / Where can I see the painting behind Derpy?
+PREFIX kdh: <http://dh.aks.ac.kr/2026/kdh/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?artifact ?keeper WHERE {
+  ?c rdfs:label "더피"@ko .
+  ?c kdh:inspiredBy ?m .
+  ?a kdh:exampleOf ?m .
+  ?a kdh:heldBy ?o .
+  ?a rdfs:label ?artifact .
+  ?o rdfs:label ?keeper .
+  FILTER(lang(?artifact)="ko" && lang(?keeper)="ko")
+}

@@ -1,0 +1,22 @@
+source_id	source_label	relation	target_id	label	remark	dataset	recorder
+A0002	루미	kdh:appearsIn	A0001	케이팝 데몬 헌터스	루미는 케이팝 데몬 헌터스에 등장인물이다.	kdh	JSY
+A0003	진우	kdh:appearsIn	A0001	케이팝 데몬 헌터스	진우는 케이팝 데몬 헌터스에 등장인물이다.	kdh	JSY
+A0004	더피	kdh:appearsIn	A0001	케이팝 데몬 헌터스	더피는 케이팝 데몬 헌터스에 등장인물이다.	kdh	JSY
+A0005	수지	kdh:appearsIn	A0001	케이팝 데몬 헌터스	수지는 케이팝 데몬 헌터스에 등장인물이다.	kdh	JSY
+A0006	헌트릭스	kdh:appearsIn	A0001	케이팝 데몬 헌터스	헌트릭스는 케이팝 데몬 헌터스에 등장하는 아이돌 그룹이다.	kdh	JSY
+A0007	사자 보이즈	kdh:appearsIn	A0001	케이팝 데몬 헌터스	사자 보이즈는 케이팝 데몬 헌터스에 등장하는 아이돌 그룹이다.	kdh	JSY
+A0002	루미	schema:memberOf	A0006	헌트릭스	루미는 헌트릭스의 멤버이다.	kdh	JSY
+A0003	진우	schema:memberOf	A0007	사자 보이즈	진우는 사자 보이즈의 멤버이다.	kdh	JSY
+A0004	더피	kdh:inspiredBy	A0008	호작도	제작진이 호작도의 호랑이에서 왔다고 밝혔다.	kdh	JSY
+A0005	수지	kdh:inspiredBy	A0008	호작도	제작진이 호작도의 까치에서 왔다고 밝혔다.	kdh	JSY
+A0007	사자 보이즈	kdh:inspiredBy	A0011	저승사자	검은 옷과 그룹 이름이 저승사자를 떠올리게 한다고 소개된다.	kdh	JSY
+A0007	사자 보이즈	kdh:inspiredBy	A0010	갓	사자 보이즈가 쓰는 모자가 갓이다.	kdh	JSY
+A0002	루미	kdh:uses	A0009	사인검	기사에서 루미의 검을 사인검으로 소개한다.	kdh	JSY
+A0012	호작도 (1592년)	kdh:exampleOf	A0008	호작도	이 그림이 무엇의 한 예인지 나타낸다. 호랑이와 까치를 함께 그렸기 때문에 호작도의 한 예이다.	kdh	JSY
+A0013	사인검 (국립고궁박물관)	kdh:exampleOf	A0009	사인검	이 칼이 무엇의 한 예인지 나타낸다. 기사에서 국립고궁박물관에 전시된 사인검으로 소개되었기 때문에 사인검의 한 예이다.	kdh	JSY
+A0012	호작도 (1592년)	kdh:heldBy	A0014	리움미술관	이 그림을 어느 기관이 소장하고 있는지(지금 맡아서 관리하고 있는지) 나타낸다. 리움미술관이 소장하고 있다. 소장하고 있다는 것이 지금 전시 중이라는 뜻은 아니다. 2025년 〈까치호랑이 虎鵲〉 전시에서 처음 공개되었고, 그 전시는 끝났다.	kdh	JSY
+A0013	사인검 (국립고궁박물관)	kdh:heldBy	A0015	국립고궁박물관	이 칼을 어느 기관이 소장하고 있는지(지금 맡아서 관리하고 있는지) 나타낸다. 국립고궁박물관이 소장하고 있다. 2025년 기사 기준으로 지하 1층 과학문화실에 전시되어 있다.	kdh	JSY
+A0018	까치호랑이 배지	schema:isBasedOn	A0008	호작도	호작도의 호랑이와 까치를 담은 배지로, 더피와 수지를 닮았다.	kdh	JSY
+A0019	갓끈 볼펜	schema:isBasedOn	A0010	갓	갓을 쓸 때 턱 아래로 묶는 끈인 갓끈의 모양을 살렸다.	kdh	JSY
+A0018	까치호랑이 배지	kdh:soldAt	A0016	국립중앙박물관	국립중앙박물관 상품관 뮷즈에서 판다. 케데헌이 인기를 끌면서 품절되기도 했다.	kdh	JSY
+A0019	갓끈 볼펜	kdh:soldAt	A0017	국립대구박물관	국립대구박물관의 특화상품이다. 케데헌이 인기를 끌면서 품절되어 추가로 만들었다고 알려졌다.	kdh	JSY

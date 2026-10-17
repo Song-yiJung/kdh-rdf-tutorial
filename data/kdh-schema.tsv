@@ -1,0 +1,29 @@
+Class	한국어	영어	GroupName	무엇을 담나	label 쓰는 법	예시	status
+Work	작품	Work	작품	이 데이터의 중심이 되는 작품이다	작품 이름	A0001 케이팝 데몬 헌터스	샘플
+Character	등장인물	Character	인물	작품에 나오는 사람이다	이름	A0002 루미 / A0003 진우	샘플
+Character	등장인물	Character	동물	작품에 나오는 동물이다	이름	A0004 더피 / A0005 수지	샘플
+Organization	단체	Organization	작품 속 그룹	작품에 나오는 그룹이다	그룹 이름	A0006 헌트릭스 / A0007 사자 보이즈	샘플
+Organization	단체	Organization	실제 기관	실제로 있는 박물관과 미술관이다	기관의 공식 이름	A0015 국립고궁박물관 / A0014 리움미술관	샘플
+Motif	모티프	Motif	그림 주제	여러 그림에 반복해서 나오는 주제이다. 그림 한 점이 아니다	주제 이름	A0008 호작도(까치호랑이 그림)	샘플
+Motif	모티프	Motif	물건 종류	같은 종류의 물건을 묶은 이름이다. 물건 한 점이 아니다	종류 이름	A0009 사인검 / A0010 갓	샘플
+Motif	모티프	Motif	옛이야기 속 존재	민속 신앙과 옛이야기에 나오는 존재이다	이름	A0011 저승사자	샘플
+Artifact	유물	Artifact	유물	박물관이나 미술관이 소장한 진짜 물건 한 점이다. 등장인물과 바로 연결하지 않고, 모티프를 거쳐서 연결한다	이름 (구별 정보)	A0012 호작도 (1592년) / A0013 사인검 (국립고궁박물관)	샘플
+Goods	상품	Goods	박물관 상품	박물관에서 만들고 파는 굿즈이다	상품 이름	A0018 까치호랑이 배지 / A0019 갓끈 볼펜	샘플
+Person	실존 인물	Person	배우·가수	작품에 목소리나 노래로 참여한 실제 사람이다. 등장인물과 다른 클래스이다	이름	(예) A0100 안효섭	확장 예시
+Place	장소	Place	도시·지역	실제 도시나 지역이다	장소 이름	(예) A0200 서울 / A0201 대구	확장 예시
+Event	사건	Event	전시	한 번 열린 전시이다. 기간은 remark에 적는다	[기관] 〈전시명〉	(예) A0300 리움미술관 〈까치호랑이 虎鵲〉	확장 예시
+
+구분	relation	relation_ko	영어	source Class	target Class	쓰는 법	예시 (source → target)	status
+작품	kdh:appearsIn	나오는 작품	appears in	Character, Organization	Work	인물, 동물, 그룹이 source가 된다. 작품마다 한 줄씩 쓴다	A0004 → A0001, A0006 → A0001	샘플
+작품	schema:memberOf	소속 그룹	member of	Character	Organization	그룹에 들어 있는 인물만 연결한다	A0002 → A0006, A0003 → A0007	샘플
+모티프	kdh:inspiredBy	영감을 준 모티프	inspired by	Character, Organization	Motif	만든 사람, 박물관, 기사에서 확인된 것만 쓴다. 근거는 트리플 remark에 적는다	A0004 → A0008, A0007 → A0011	샘플
+모티프	kdh:uses	쓰는 물건	uses	Character	Motif	인물이 쓰는 물건의 종류이다. 유물 한 점이 아니라 종류와 연결한다	A0002 → A0009	샘플
+유물	kdh:exampleOf	어떤 모티프의 예	example of	Artifact	Motif	"이 유물은 무엇의 한 예인가?"에 답한다	A0012 → A0008, A0013 → A0009	샘플
+유물	kdh:heldBy	소장 기관	held by	Artifact	Organization	"이 유물은 어느 기관이 소장하고 있나?"에 답한다. 지금 맡아서 관리하는 기관이다. 소유자와 다를 수 있고, 지금 전시 중이라는 뜻은 아니다	A0012 → A0014, A0013 → A0015	샘플
+상품	schema:isBasedOn	바탕이 된 모티프	based on	Goods	Motif	상품을 만들 때 바탕이 된 모티프이다	A0018 → A0008, A0019 → A0010	샘플
+상품	kdh:soldAt	파는 곳	sold at	Goods	Organization	상품을 파는 박물관이다	A0018 → A0016, A0019 → A0017	샘플
+인물 관계	kdh:mentorOf	스승	mentor of	Character	Character, Organization	가르치는 인물이 source가 된다	(예) 셀린 → A0006	확장 예시
+배우·목소리	kdh:voicedBy	목소리	voiced by	Character	Person	등장인물이 source가 된다. 말하는 목소리와 노래하는 목소리를 나눌지는 직접 정한다	(예) A0003 → A0100	확장 예시
+장소	schema:location	있는 곳	location	Organization, Event	Place	기관이나 전시가 있는 도시이다	(예) A0017 → A0201	확장 예시
+전시	kdh:shownIn	전시된 곳	shown in	Artifact	Event	"이 유물은 어떤 전시에서 볼 수 있었나?"에 답한다. 소장(heldBy)과 다른 관계이다	(예) A0012 → A0300	확장 예시
+전시	kdh:organizedBy	연 기관	organized by	Event	Organization	전시를 연 기관이다	(예) A0300 → A0014	확장 예시

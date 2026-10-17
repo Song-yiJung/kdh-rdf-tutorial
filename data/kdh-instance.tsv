@@ -1,0 +1,20 @@
+id	prefix	Class	GroupName	label	remark	infoUrl	dataset	recorder	recode_date
+A0001	kdh	Work	작품	케이팝 데몬 헌터스	2025년 넷플릭스에서 공개된 애니메이션 영화이다. 소니 픽처스가 만들었다.	https://www.kbmaeil.com/article/20250827500035	kdh	JSY	2026-10-17
+A0002	kdh	Character	인물	루미	헌트릭스의 리더이자 메인 보컬이며, 이 영화의 주인공이다. 보라색 머리가 특징이고, 제니의 'Kill This Love' 스타일링에서 영감을 얻었다고 알려져 있다. 헌트릭스의 스승은 셀린이다. 영어 목소리는 아든 조, 노래 목소리는 이재(EJAE)가 맡았다. 아든 조는 처음에 셀린 역으로 오디션을 봤다.	https://mobile.newsis.com/view/NISX20260202_0003498168	kdh	JSY	2026-10-17
+A0003	kdh	Character	인물	진우	사자 보이즈의 리더이자 이 영화의 남자 주인공이다. 더피와 수지를 데리고 다니며, 더피에게 주려고 갓을 만들었지만 수지가 자꾸 가져간다. 겉모습은 차은우와 남주혁을 참고했다고 알려져 있다. 배우 안효섭이 모든 대사를 영어로 연기했고, 노래 목소리는 앤드류 최가 맡았다. 안효섭은 진우 안의 악마가 고통과 죄책감, 어쩔 수 없던 선택에 대한 후회로 이루어져 있다고 설명했다.	https://www.etoday.co.kr/news/view/2482629	kdh	JSY	2026-10-17
+A0004	kdh	Character	동물	더피	진우와 함께 다니는 호랑이다. 제작진은 호작도의 호랑이에서 영감을 받았다고 밝혔다. 영화 안에서 이름이 불리지는 않는다. 영어 이름은 Derpy이다.	https://m-economynews.com/news/article.html?no=59252	kdh	JSY	2026-10-17
+A0005	kdh	Character	동물	수지	더피와 함께 다니는 까치이다. 영어 이름은 Sussie, 한국어 이름은 기사마다 수지, 서씨, 수씨로 다르다.	https://reactormag.com/the-power-of-a-cute-animal-sidekick/	kdh	JSY	2026-10-17
+A0006	kdh	Organization	작품 속 그룹	헌트릭스	루미, 미라, 조이로 이루어진 걸그룹이다. 무대 밖에서는 노래로 악령을 막는 헌터이다.	https://nocutnews.co.kr/news/6374825	kdh	JSY	2026-10-17
+A0007	kdh	Organization	작품 속 그룹	사자 보이즈	진우가 리더인 보이그룹이다. 검은 옷과 갓 차림이 저승사자를 떠올리게 하고, 그룹 이름 '사자'는 사자(lion)와 저승사자를 함께 뜻한다.	https://linguasia.com/korean-culture-kpop-demon-hunters	kdh	JSY	2026-10-17
+A0008	kdh	Motif	그림 주제	호작도	호랑이와 까치를 함께 그린 그림이다. 까치호랑이 그림이라고도 한다.	https://design.co.kr/article/133221/	kdh	JSY	2026-10-17
+A0009	kdh	Motif	물건 종류	사인검	호랑이의 기운으로 나쁜 것을 막으려고 만든 조선 시대의 칼이다.	https://www.vogue.co.kr/?p=697193	kdh	JSY	2026-10-17
+A0010	kdh	Motif	물건 종류	갓	조선 시대에 쓰던 검은 모자이다.	https://korea.stripes.com/travel/k-pop-demon-hunters-culture-and-travel.html	kdh	JSY	2026-10-17
+A0011	kdh	Motif	옛이야기 속 존재	저승사자	죽은 사람의 영혼을 저승으로 데려가는 존재이다.	https://korea.stripes.com/travel/k-pop-demon-hunters-culture-and-travel.html	kdh	JSY	2026-10-17
+A0012	kdh	Artifact	유물	호작도 (1592년)	지금 남아 있는 까치호랑이 그림 중에서 만든 해가 가장 분명한 작품이다. 비단에 먹으로 그렸다.	https://design.co.kr/article/133221/	kdh	JSY	2026-10-17
+A0013	kdh	Artifact	유물	사인검 (국립고궁박물관)	국립고궁박물관 지하 1층 과학문화실에 전시된 칼이다. 기사에서 '루미의 검'으로 소개되었다.	https://www.sidae.com/article/2025091217245119988	kdh	JSY	2026-10-17
+A0014	kdh	Organization	실제 기관	리움미술관	서울 한남동에 있는 미술관이다.	https://www.leeum.org	kdh	JSY	2026-10-17
+A0015	kdh	Organization	실제 기관	국립고궁박물관	서울 경복궁 안에 있는 박물관이다. 조선 왕실의 유물을 가지고 있다.	https://www.gogung.go.kr	kdh	JSY	2026-10-17
+A0016	kdh	Organization	실제 기관	국립중앙박물관	서울 용산에 있는 박물관이다. 상품관 뮷즈(MU:DS)가 있다.	https://www.museum.go.kr	kdh	JSY	2026-10-17
+A0017	kdh	Organization	실제 기관	국립대구박물관	대구에 있는 박물관이다. 복식문화실에 여러 가지 갓을 전시한다.	https://daegu.museum.go.kr	kdh	JSY	2026-10-17
+A0018	kdh	Goods	박물관 상품	까치호랑이 배지	뮷즈에서 파는 배지이다. 더피와 수지를 닮아 인기가 많았다.	https://korea.stripes.com/travel/k-pop-demon-hunters-culture-and-travel.html	kdh	JSY	2026-10-17
+A0019	kdh	Goods	박물관 상품	갓끈 볼펜	갓의 끈 모양을 살린 볼펜이다. 국립대구박물관의 특화상품이다.	https://www.imaeil.com/page/view/2025073019205867150	kdh	JSY	2026-10-17

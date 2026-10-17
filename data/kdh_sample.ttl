@@ -1,0 +1,395 @@
+@prefix kdh:    <http://dh.aks.ac.kr/2026/kdh/> .
+@prefix schema: <https://schema.org/> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# ─────────────────────────────────────────────
+# 케이팝 데몬 헌터스와 한국 문화유산 (KPop Demon Hunters and Korean Heritage) · prefix kdh
+# 한국학 자료와 시맨틱 데이터 입문: RDF로 만드는 지식그래프 첫걸음
+# ─────────────────────────────────────────────
+
+<http://dh.aks.ac.kr/2026/kdh> a owl:Ontology ;
+    rdfs:label "케이팝 데몬 헌터스와 한국 문화유산"@ko , "KPop Demon Hunters and Korean Heritage"@en ;
+    rdfs:comment "케이팝 데몬 헌터스와 그 모티프가 된 한국 문화유산을 잇는 실습용 샘플 데이터이다."@ko ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+
+# ── 주석 속성 (시트의 열) ──
+kdh:groupName a owl:AnnotationProperty ;
+    rdfs:label "GroupName"@ko ;
+    rdfs:comment "클래스 안의 세부 갈래이다. 예를 들어 등장인물은 인물과 동물로, 단체는 작품 속 그룹과 실제 기관으로 나뉜다."@ko .
+kdh:id a owl:AnnotationProperty ;
+    rdfs:label "id"@ko .
+kdh:dataset a owl:AnnotationProperty ;
+    rdfs:label "dataset"@ko .
+dcterms:creator a owl:AnnotationProperty .
+dcterms:created a owl:AnnotationProperty .
+rdfs:seeAlso a owl:AnnotationProperty .
+
+# ── 클래스 ──
+kdh:Work a owl:Class ;
+    rdfs:label "작품"@ko , "Work"@en ;
+    rdfs:comment "이 데이터의 중심이 되는 작품이다."@ko .
+kdh:Character a owl:Class ;
+    rdfs:label "등장인물"@ko , "Character"@en ;
+    rdfs:comment "작품에 나오는 사람이나 동물이다."@ko .
+kdh:Organization a owl:Class ;
+    rdfs:label "단체"@ko , "Organization"@en ;
+    rdfs:comment "작품에 나오는 그룹이거나, 실제로 있는 박물관과 미술관이다."@ko .
+kdh:Motif a owl:Class ;
+    rdfs:label "모티프"@ko , "Motif"@en ;
+    rdfs:comment "여러 그림이나 물건에 반복해서 나오는 주제나 종류이다. 그림이나 물건 한 점이 아니다."@ko .
+kdh:Artifact a owl:Class ;
+    rdfs:label "유물"@ko , "Artifact"@en ;
+    rdfs:comment "박물관이나 미술관이 소장한 진짜 물건 한 점이다. 등장인물과 바로 연결하지 않고, 모티프를 거쳐서 연결한다."@ko .
+kdh:Goods a owl:Class ;
+    rdfs:label "상품"@ko , "Goods"@en ;
+    rdfs:comment "박물관에서 만들고 파는 굿즈이다."@ko .
+
+# ── 관계 (relation) ──
+kdh:appearsIn a owl:ObjectProperty ;
+    rdfs:label "나오는 작품"@ko , "appears in"@en ;
+    rdfs:comment "인물, 동물, 그룹이 나오는 작품이다. 인물, 동물, 그룹이 source가 된다."@ko ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( kdh:Character kdh:Organization ) ] ;
+    rdfs:range kdh:Work .
+schema:memberOf a owl:ObjectProperty ;
+    rdfs:label "소속 그룹"@ko , "member of"@en ;
+    rdfs:comment "그룹에 들어 있는 인물만 연결한다. schema.org의 속성을 그대로 쓴다."@ko ;
+    rdfs:domain kdh:Character ;
+    rdfs:range kdh:Organization .
+kdh:inspiredBy a owl:ObjectProperty ;
+    rdfs:label "영감을 준 모티프"@ko , "inspired by"@en ;
+    rdfs:comment "영감을 준 모티프이다. 만든 사람, 박물관, 기사에서 확인된 것만 쓰고, 근거는 트리플 remark에 적는다."@ko ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( kdh:Character kdh:Organization ) ] ;
+    rdfs:range kdh:Motif .
+kdh:uses a owl:ObjectProperty ;
+    rdfs:label "쓰는 물건"@ko , "uses"@en ;
+    rdfs:comment "인물이 쓰는 물건의 종류이다. 유물 한 점이 아니라 종류와 연결한다."@ko ;
+    rdfs:domain kdh:Character ;
+    rdfs:range kdh:Motif .
+kdh:exampleOf a owl:ObjectProperty ;
+    rdfs:label "어떤 모티프의 예"@ko , "example of"@en ;
+    rdfs:comment "'이 유물은 무엇의 한 예인가?'에 답한다."@ko ;
+    rdfs:domain kdh:Artifact ;
+    rdfs:range kdh:Motif .
+kdh:heldBy a owl:ObjectProperty ;
+    rdfs:label "소장 기관"@ko , "held by"@en ;
+    rdfs:comment "'이 유물은 어느 기관이 소장하고 있나?'에 답한다. 지금 맡아서 관리하는 기관이다. 소유자와 다를 수 있고, 지금 전시 중이라는 뜻은 아니다. CIDOC CRM P50(현재 보관자)과 같은 뜻이다."@ko ;
+    rdfs:domain kdh:Artifact ;
+    rdfs:range kdh:Organization .
+schema:isBasedOn a owl:ObjectProperty ;
+    rdfs:label "바탕이 된 모티프"@ko , "based on"@en ;
+    rdfs:comment "상품을 만들 때 바탕이 된 모티프이다. schema.org의 속성을 그대로 쓴다."@ko ;
+    rdfs:domain kdh:Goods ;
+    rdfs:range kdh:Motif .
+kdh:soldAt a owl:ObjectProperty ;
+    rdfs:label "파는 곳"@ko , "sold at"@en ;
+    rdfs:comment "상품을 파는 박물관이다."@ko ;
+    rdfs:domain kdh:Goods ;
+    rdfs:range kdh:Organization .
+
+# ── 인스턴스 ──
+kdh:A0001 a owl:NamedIndividual , kdh:Work ;
+    rdfs:label "케이팝 데몬 헌터스"@ko , "KPop Demon Hunters"@en ;
+    kdh:id "A0001" ;
+    kdh:groupName "작품"@ko ;
+    rdfs:comment "2025년 넷플릭스에서 공개된 애니메이션 영화이다. 소니 픽처스가 만들었다."@ko ;
+    rdfs:seeAlso <https://www.kbmaeil.com/article/20250827500035> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0002 a owl:NamedIndividual , kdh:Character ;
+    rdfs:label "루미"@ko , "Rumi"@en ;
+    kdh:id "A0002" ;
+    kdh:groupName "인물"@ko ;
+    rdfs:comment "헌트릭스의 리더이자 메인 보컬이며, 이 영화의 주인공이다. 보라색 머리가 특징이고, 제니의 'Kill This Love' 스타일링에서 영감을 얻었다고 알려져 있다. 헌트릭스의 스승은 셀린이다. 영어 목소리는 아든 조, 노래 목소리는 이재(EJAE)가 맡았다. 아든 조는 처음에 셀린 역으로 오디션을 봤다."@ko ;
+    rdfs:seeAlso <https://mobile.newsis.com/view/NISX20260202_0003498168> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0003 a owl:NamedIndividual , kdh:Character ;
+    rdfs:label "진우"@ko , "Jinu"@en ;
+    kdh:id "A0003" ;
+    kdh:groupName "인물"@ko ;
+    rdfs:comment "사자 보이즈의 리더이자 이 영화의 남자 주인공이다. 더피와 수지를 데리고 다니며, 더피에게 주려고 갓을 만들었지만 수지가 자꾸 가져간다. 겉모습은 차은우와 남주혁을 참고했다고 알려져 있다. 배우 안효섭이 모든 대사를 영어로 연기했고, 노래 목소리는 앤드류 최가 맡았다. 안효섭은 진우 안의 악마가 고통과 죄책감, 어쩔 수 없던 선택에 대한 후회로 이루어져 있다고 설명했다."@ko ;
+    rdfs:seeAlso <https://www.etoday.co.kr/news/view/2482629> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0004 a owl:NamedIndividual , kdh:Character ;
+    rdfs:label "더피"@ko , "Derpy"@en ;
+    kdh:id "A0004" ;
+    kdh:groupName "동물"@ko ;
+    rdfs:comment "진우와 함께 다니는 호랑이다. 제작진은 호작도의 호랑이에서 영감을 받았다고 밝혔다. 영화 안에서 이름이 불리지는 않는다. 영어 이름은 Derpy이다."@ko ;
+    rdfs:seeAlso <https://m-economynews.com/news/article.html?no=59252> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0005 a owl:NamedIndividual , kdh:Character ;
+    rdfs:label "수지"@ko , "Sussie"@en ;
+    kdh:id "A0005" ;
+    kdh:groupName "동물"@ko ;
+    rdfs:comment "더피와 함께 다니는 까치이다. 영어 이름은 Sussie, 한국어 이름은 기사마다 수지, 서씨, 수씨로 다르다."@ko ;
+    rdfs:seeAlso <https://reactormag.com/the-power-of-a-cute-animal-sidekick/> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0006 a owl:NamedIndividual , kdh:Organization ;
+    rdfs:label "헌트릭스"@ko , "HUNTR/X"@en ;
+    kdh:id "A0006" ;
+    kdh:groupName "작품 속 그룹"@ko ;
+    rdfs:comment "루미, 미라, 조이로 이루어진 걸그룹이다. 무대 밖에서는 노래로 악령을 막는 헌터이다."@ko ;
+    rdfs:seeAlso <https://nocutnews.co.kr/news/6374825> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0007 a owl:NamedIndividual , kdh:Organization ;
+    rdfs:label "사자 보이즈"@ko , "Saja Boys"@en ;
+    kdh:id "A0007" ;
+    kdh:groupName "작품 속 그룹"@ko ;
+    rdfs:comment "진우가 리더인 보이그룹이다. 검은 옷과 갓 차림이 저승사자를 떠올리게 하고, 그룹 이름 '사자'는 사자(lion)와 저승사자를 함께 뜻한다."@ko ;
+    rdfs:seeAlso <https://linguasia.com/korean-culture-kpop-demon-hunters> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0008 a owl:NamedIndividual , kdh:Motif ;
+    rdfs:label "호작도"@ko , "Hojakdo (magpie and tiger painting)"@en ;
+    kdh:id "A0008" ;
+    kdh:groupName "그림 주제"@ko ;
+    rdfs:comment "호랑이와 까치를 함께 그린 그림이다. 까치호랑이 그림이라고도 한다."@ko ;
+    rdfs:seeAlso <https://design.co.kr/article/133221/> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0009 a owl:NamedIndividual , kdh:Motif ;
+    rdfs:label "사인검"@ko , "Saingeom (four-tiger sword)"@en ;
+    kdh:id "A0009" ;
+    kdh:groupName "물건 종류"@ko ;
+    rdfs:comment "호랑이의 기운으로 나쁜 것을 막으려고 만든 조선 시대의 칼이다."@ko ;
+    rdfs:seeAlso <https://www.vogue.co.kr/?p=697193> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0010 a owl:NamedIndividual , kdh:Motif ;
+    rdfs:label "갓"@ko , "Gat (traditional hat)"@en ;
+    kdh:id "A0010" ;
+    kdh:groupName "물건 종류"@ko ;
+    rdfs:comment "조선 시대에 쓰던 검은 모자이다."@ko ;
+    rdfs:seeAlso <https://korea.stripes.com/travel/k-pop-demon-hunters-culture-and-travel.html> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0011 a owl:NamedIndividual , kdh:Motif ;
+    rdfs:label "저승사자"@ko , "Jeoseung saja (grim reaper)"@en ;
+    kdh:id "A0011" ;
+    kdh:groupName "옛이야기 속 존재"@ko ;
+    rdfs:comment "죽은 사람의 영혼을 저승으로 데려가는 존재이다."@ko ;
+    rdfs:seeAlso <https://korea.stripes.com/travel/k-pop-demon-hunters-culture-and-travel.html> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0012 a owl:NamedIndividual , kdh:Artifact ;
+    rdfs:label "호작도 (1592년)"@ko , "Hojakdo (1592)"@en ;
+    kdh:id "A0012" ;
+    kdh:groupName "유물"@ko ;
+    rdfs:comment "지금 남아 있는 까치호랑이 그림 중에서 만든 해가 가장 분명한 작품이다. 비단에 먹으로 그렸다."@ko ;
+    rdfs:seeAlso <https://design.co.kr/article/133221/> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0013 a owl:NamedIndividual , kdh:Artifact ;
+    rdfs:label "사인검 (국립고궁박물관)"@ko , "Saingeom (National Palace Museum of Korea)"@en ;
+    kdh:id "A0013" ;
+    kdh:groupName "유물"@ko ;
+    rdfs:comment "국립고궁박물관 지하 1층 과학문화실에 전시된 칼이다. 기사에서 '루미의 검'으로 소개되었다."@ko ;
+    rdfs:seeAlso <https://www.sidae.com/article/2025091217245119988> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0014 a owl:NamedIndividual , kdh:Organization ;
+    rdfs:label "리움미술관"@ko , "Leeum Museum of Art"@en ;
+    kdh:id "A0014" ;
+    kdh:groupName "실제 기관"@ko ;
+    rdfs:comment "서울 한남동에 있는 미술관이다."@ko ;
+    rdfs:seeAlso <https://www.leeum.org> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0015 a owl:NamedIndividual , kdh:Organization ;
+    rdfs:label "국립고궁박물관"@ko , "National Palace Museum of Korea"@en ;
+    kdh:id "A0015" ;
+    kdh:groupName "실제 기관"@ko ;
+    rdfs:comment "서울 경복궁 안에 있는 박물관이다. 조선 왕실의 유물을 가지고 있다."@ko ;
+    rdfs:seeAlso <https://www.gogung.go.kr> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0016 a owl:NamedIndividual , kdh:Organization ;
+    rdfs:label "국립중앙박물관"@ko , "National Museum of Korea"@en ;
+    kdh:id "A0016" ;
+    kdh:groupName "실제 기관"@ko ;
+    rdfs:comment "서울 용산에 있는 박물관이다. 상품관 뮷즈(MU:DS)가 있다."@ko ;
+    rdfs:seeAlso <https://www.museum.go.kr> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0017 a owl:NamedIndividual , kdh:Organization ;
+    rdfs:label "국립대구박물관"@ko , "Daegu National Museum"@en ;
+    kdh:id "A0017" ;
+    kdh:groupName "실제 기관"@ko ;
+    rdfs:comment "대구에 있는 박물관이다. 복식문화실에 여러 가지 갓을 전시한다."@ko ;
+    rdfs:seeAlso <https://daegu.museum.go.kr> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0018 a owl:NamedIndividual , kdh:Goods ;
+    rdfs:label "까치호랑이 배지"@ko , "Magpie and Tiger badge"@en ;
+    kdh:id "A0018" ;
+    kdh:groupName "박물관 상품"@ko ;
+    rdfs:comment "뮷즈에서 파는 배지이다. 더피와 수지를 닮아 인기가 많았다."@ko ;
+    rdfs:seeAlso <https://korea.stripes.com/travel/k-pop-demon-hunters-culture-and-travel.html> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+kdh:A0019 a owl:NamedIndividual , kdh:Goods ;
+    rdfs:label "갓끈 볼펜"@ko , "Gatkkeun ballpoint pen"@en ;
+    kdh:id "A0019" ;
+    kdh:groupName "박물관 상품"@ko ;
+    rdfs:comment "갓의 끈 모양을 살린 볼펜이다. 국립대구박물관의 특화상품이다."@ko ;
+    rdfs:seeAlso <https://www.imaeil.com/page/view/2025073019205867150> ;
+    kdh:dataset "kdh" ;
+    dcterms:creator "JSY" ;
+    dcterms:created "2026-10-17"^^xsd:date .
+
+# ── 트리플 ──
+kdh:A0002 kdh:appearsIn kdh:A0001 .
+kdh:A0003 kdh:appearsIn kdh:A0001 .
+kdh:A0004 kdh:appearsIn kdh:A0001 .
+kdh:A0005 kdh:appearsIn kdh:A0001 .
+kdh:A0006 kdh:appearsIn kdh:A0001 .
+kdh:A0007 kdh:appearsIn kdh:A0001 .
+kdh:A0002 schema:memberOf kdh:A0006 .
+kdh:A0003 schema:memberOf kdh:A0007 .
+kdh:A0004 kdh:inspiredBy kdh:A0008 .
+kdh:A0005 kdh:inspiredBy kdh:A0008 .
+kdh:A0007 kdh:inspiredBy kdh:A0011 .
+kdh:A0007 kdh:inspiredBy kdh:A0010 .
+kdh:A0002 kdh:uses kdh:A0009 .
+kdh:A0012 kdh:exampleOf kdh:A0008 .
+kdh:A0013 kdh:exampleOf kdh:A0009 .
+kdh:A0012 kdh:heldBy kdh:A0014 .
+kdh:A0013 kdh:heldBy kdh:A0015 .
+kdh:A0018 schema:isBasedOn kdh:A0008 .
+kdh:A0019 schema:isBasedOn kdh:A0010 .
+kdh:A0018 kdh:soldAt kdh:A0016 .
+kdh:A0019 kdh:soldAt kdh:A0017 .
+
+# ── 트리플의 remark (관계에 붙인 설명) ──
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0002 ;
+    owl:annotatedProperty kdh:appearsIn ;
+    owl:annotatedTarget kdh:A0001 ;
+    rdfs:comment "루미는 케이팝 데몬 헌터스에 등장인물이다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0003 ;
+    owl:annotatedProperty kdh:appearsIn ;
+    owl:annotatedTarget kdh:A0001 ;
+    rdfs:comment "진우는 케이팝 데몬 헌터스에 등장인물이다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0004 ;
+    owl:annotatedProperty kdh:appearsIn ;
+    owl:annotatedTarget kdh:A0001 ;
+    rdfs:comment "더피는 케이팝 데몬 헌터스에 등장인물이다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0005 ;
+    owl:annotatedProperty kdh:appearsIn ;
+    owl:annotatedTarget kdh:A0001 ;
+    rdfs:comment "수지는 케이팝 데몬 헌터스에 등장인물이다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0006 ;
+    owl:annotatedProperty kdh:appearsIn ;
+    owl:annotatedTarget kdh:A0001 ;
+    rdfs:comment "헌트릭스는 케이팝 데몬 헌터스에 등장하는 아이돌 그룹이다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0007 ;
+    owl:annotatedProperty kdh:appearsIn ;
+    owl:annotatedTarget kdh:A0001 ;
+    rdfs:comment "사자 보이즈는 케이팝 데몬 헌터스에 등장하는 아이돌 그룹이다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0002 ;
+    owl:annotatedProperty schema:memberOf ;
+    owl:annotatedTarget kdh:A0006 ;
+    rdfs:comment "루미는 헌트릭스의 멤버이다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0003 ;
+    owl:annotatedProperty schema:memberOf ;
+    owl:annotatedTarget kdh:A0007 ;
+    rdfs:comment "진우는 사자 보이즈의 멤버이다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0004 ;
+    owl:annotatedProperty kdh:inspiredBy ;
+    owl:annotatedTarget kdh:A0008 ;
+    rdfs:comment "제작진이 호작도의 호랑이에서 왔다고 밝혔다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0005 ;
+    owl:annotatedProperty kdh:inspiredBy ;
+    owl:annotatedTarget kdh:A0008 ;
+    rdfs:comment "제작진이 호작도의 까치에서 왔다고 밝혔다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0007 ;
+    owl:annotatedProperty kdh:inspiredBy ;
+    owl:annotatedTarget kdh:A0011 ;
+    rdfs:comment "검은 옷과 그룹 이름이 저승사자를 떠올리게 한다고 소개된다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0007 ;
+    owl:annotatedProperty kdh:inspiredBy ;
+    owl:annotatedTarget kdh:A0010 ;
+    rdfs:comment "사자 보이즈가 쓰는 모자가 갓이다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0002 ;
+    owl:annotatedProperty kdh:uses ;
+    owl:annotatedTarget kdh:A0009 ;
+    rdfs:comment "기사에서 루미의 검을 사인검으로 소개한다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0012 ;
+    owl:annotatedProperty kdh:exampleOf ;
+    owl:annotatedTarget kdh:A0008 ;
+    rdfs:comment "이 그림이 무엇의 한 예인지 나타낸다. 호랑이와 까치를 함께 그렸기 때문에 호작도의 한 예이다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0013 ;
+    owl:annotatedProperty kdh:exampleOf ;
+    owl:annotatedTarget kdh:A0009 ;
+    rdfs:comment "이 칼이 무엇의 한 예인지 나타낸다. 기사에서 국립고궁박물관에 전시된 사인검으로 소개되었기 때문에 사인검의 한 예이다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0012 ;
+    owl:annotatedProperty kdh:heldBy ;
+    owl:annotatedTarget kdh:A0014 ;
+    rdfs:comment "이 그림을 어느 기관이 소장하고 있는지(지금 맡아서 관리하고 있는지) 나타낸다. 리움미술관이 소장하고 있다. 소장하고 있다는 것이 지금 전시 중이라는 뜻은 아니다. 2025년 〈까치호랑이 虎鵲〉 전시에서 처음 공개되었고, 그 전시는 끝났다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0013 ;
+    owl:annotatedProperty kdh:heldBy ;
+    owl:annotatedTarget kdh:A0015 ;
+    rdfs:comment "이 칼을 어느 기관이 소장하고 있는지(지금 맡아서 관리하고 있는지) 나타낸다. 국립고궁박물관이 소장하고 있다. 2025년 기사 기준으로 지하 1층 과학문화실에 전시되어 있다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0018 ;
+    owl:annotatedProperty schema:isBasedOn ;
+    owl:annotatedTarget kdh:A0008 ;
+    rdfs:comment "호작도의 호랑이와 까치를 담은 배지로, 더피와 수지를 닮았다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0019 ;
+    owl:annotatedProperty schema:isBasedOn ;
+    owl:annotatedTarget kdh:A0010 ;
+    rdfs:comment "갓을 쓸 때 턱 아래로 묶는 끈인 갓끈의 모양을 살렸다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0018 ;
+    owl:annotatedProperty kdh:soldAt ;
+    owl:annotatedTarget kdh:A0016 ;
+    rdfs:comment "국립중앙박물관 상품관 뮷즈에서 판다. 케데헌이 인기를 끌면서 품절되기도 했다."@ko .
+[] a owl:Axiom ;
+    owl:annotatedSource kdh:A0019 ;
+    owl:annotatedProperty kdh:soldAt ;
+    owl:annotatedTarget kdh:A0017 ;
+    rdfs:comment "국립대구박물관의 특화상품이다. 케데헌이 인기를 끌면서 품절되어 추가로 만들었다고 알려졌다."@ko .
